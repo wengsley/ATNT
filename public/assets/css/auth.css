@@ -1,0 +1,29 @@
+/*  
+ * Login Page Style
+ */
+.login-box {
+	float:right;
+	width:30%;
+	background-color: #fff;
+}
+
+.register-box {
+	margin:0 auto;
+	width:50%;
+}
+
+.top-form {
+
+}
+
+.left-form {
+	width: 50%;
+	float:left;
+	padding:1px;
+}
+
+.right-form {
+	width: 50%;
+	float:right;
+	padding:1px;
+}
