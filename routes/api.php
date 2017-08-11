@@ -18,4 +18,4 @@ use Illuminate\Http\Request;
 // });
 
 
-Route::post('/', 'Api\BasicController@ApiCall')->name('api.basic.insert');
+Route::post('/', 'Api\BasicController@ApiCall')->name('api.basic.apicall');
