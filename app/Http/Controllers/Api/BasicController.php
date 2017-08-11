@@ -88,6 +88,42 @@ class BasicController extends Controller
             $status = "good";
         }
 
+        $food_info['status'] = $status;
+
         return Tool::returnJson($food_info);
+    }
+
+    public function ApiAfterMeal(Request $request)
+    {
+        $data = $request->all();
+        $return_data = [];
+        $bmi_status = null;
+        $heartbeat = rand(95,110);
+
+        $height = $data['height'];
+        $weightx2 = (int)$data['weight']*(int)$data['weight'];
+
+        $bmi = $data['height']/$weightx2;
+        $bmi_result = $bmi*10000;
+
+        if($bmi_result > 24.99) {
+            $bmi_status = 'overweight';
+        } else if($bmi_result < 18.50) {
+            $bmi_status = 'underweight';
+        } else {
+            $bmi_status = 'normal';
+        } 
+
+        if($data['device_id'] == "123456") {
+            $return_data = [
+                "status" => "connected",
+                "name" => "Wakka",
+                "heartbeat" => $heartbeat,
+                "bmi" => $bmi_status,
+                "calories" => '700'
+            ];
+        }
+
+        return Tool::returnJson($return_data);
     }
 }
