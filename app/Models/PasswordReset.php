@@ -11,10 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PasswordReset extends Model
 {
 	
-	protected $table = 'password_resets';
+	protected $table = 'food_information';
 	
-	protected $hidden = [
-        
-    ];
+	protected $hidden = [];
 
 }
