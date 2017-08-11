@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 //use Illuminate\Foundation\Auth\ThrottlesLogins; 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Validator;
 use Session;
 use Eloquent;
@@ -34,7 +33,7 @@ class BasicController extends Controller
      * Implemented By Ong Weng Yew
      * Show the Login Page 
      */
-    public function ApiDeviceCall(Requests $request)
+    public function ApiDeviceCall(Request $request)
     {
         $data = $request->all();
         $return_data = [];
@@ -55,24 +54,40 @@ class BasicController extends Controller
             $bmi_status = 'normal';
         } 
 
-        if($data['device_id' == "123456"]) {
+        if($data['device_id'] == "123456") {
             $return_data = [
                 "status" => "connected",
                 "name" => "Wakka",
                 "heartbeat" => $heartbeat,
                 "bmi" => $bmi_status,
-            ]
+                "calories" => '300'
+            ];
         }
 
         return Tool::returnJson($return_data);
     }
 
-    public function ApiFoodResult(Requests $request)
+    public function ApiFoodResult(Request $request)
     {
         $data = $request->all();
         
-        $data['food_id']
-        
-        return Tool::returnJson($return_data);
+        $food_info = FoodInfo::find($data['food_id']);
+
+        return Tool::returnJson($food_info);
+    }
+
+    public function ApiCompareFood(Request $request)
+    {
+        $data = $request->all();
+        $status = null;
+        $food_info = FoodInfo::find($data['food_id']);
+
+        if($food_info['calories'] > 300) {
+            $status = "bad";
+        } else {
+            $status = "good";
+        }
+
+        return Tool::returnJson($food_info);
     }
 }
